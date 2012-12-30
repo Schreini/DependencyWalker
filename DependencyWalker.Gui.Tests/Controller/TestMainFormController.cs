@@ -1,14 +1,11 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using DependencyWalker.Gui.Controller;
 using DependencyWalker.Gui.Services;
 using DependencyWalker.Gui.Views;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
-namespace DependencyWalker.Gui.Tests
+namespace DependencyWalker.Gui.Tests.Controller
 {
     [TestClass]
     public class TestMainFormController
@@ -22,7 +19,6 @@ namespace DependencyWalker.Gui.Tests
         {
             _serviceMock = new Mock<IDependencyResolver>();
             _dependencies = new List<string>() { "Dummy.Assembly" };
-            // TODO: wie return unabhängig vom aufrufwert???
             _serviceMock.Setup(resolver => resolver.GetDependencyTree(It.IsAny<string>())).Returns (_dependencies);
             _viewMock = new Mock<IMainFormView>();
         }
