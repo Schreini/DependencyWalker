@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace DependencyWalker.Gui
@@ -15,7 +13,10 @@ namespace DependencyWalker.Gui
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            var mainForm = new MainForm();
+            var depResolver = new Services.DependencyResolver();
+            var mfController = new Controller.MainFormController(mainForm, depResolver);
+            Application.Run(mainForm);
         }
     }
 }

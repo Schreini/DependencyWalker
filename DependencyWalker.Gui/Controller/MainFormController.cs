@@ -13,6 +13,7 @@ namespace DependencyWalker.Gui.Controller
         {
             View = mainFormView;
             DependencyResolver = dependencyResolver;
+            View.Controller = this;
         }
 
         public void LoadDependencies()

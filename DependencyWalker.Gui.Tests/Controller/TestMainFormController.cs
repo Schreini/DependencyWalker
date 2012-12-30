@@ -23,6 +23,17 @@ namespace DependencyWalker.Gui.Tests.Controller
             _viewMock = new Mock<IMainFormView>();
         }
 
+        [TestMethod]
+        public void TestMainFormController_Constructor_ShouldSetSelfAsControllerInView()
+        {
+            //Arrange
+            //Act
+            var sut = new MainFormController(_viewMock.Object, _serviceMock.Object);
+
+            //Assert
+            _viewMock.VerifySet(view=>view.Controller = sut, Times.Once());
+        }
+
 
         [TestMethod]
         public void TestMainFormController_LoadDependencyTree_ShouldAskViewForAssemblyName()

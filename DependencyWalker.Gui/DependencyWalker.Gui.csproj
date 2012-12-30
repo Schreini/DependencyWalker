@@ -55,6 +55,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DependencyResolver.cs" />
     <Compile Include="Services\IDependencyResolver.cs" />
     <Compile Include="Views\IMainFormView.cs" />
     <EmbeddedResource Include="MainForm.resx">
