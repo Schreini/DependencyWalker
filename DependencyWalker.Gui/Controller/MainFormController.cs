@@ -15,9 +15,9 @@ namespace DependencyWalker.Gui.Controller
             DependencyResolver = dependencyResolver;
         }
 
-        public void LoadDependencies(string assemblyName)
+        public void LoadDependencies()
         {
-            IList<string> dependencies = DependencyResolver.GetDependencyTree(assemblyName);
+            IList<string> dependencies = DependencyResolver.GetDependencyTree(View.RootAssemblyNameAndPath);
             View.SetDependencyTree(dependencies);
         }
     }

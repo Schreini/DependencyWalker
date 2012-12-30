@@ -13,25 +13,59 @@ namespace DependencyWalker.Gui.Tests
     [TestClass]
     public class TestMainFormController
     {
-//        [TestInitialize] 
-//        public void Init
+        private Mock<IDependencyResolver> _serviceMock;
+        private List<string> _dependencies;
+        private Mock<IMainFormView> _viewMock;
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            _serviceMock = new Mock<IDependencyResolver>();
+            _dependencies = new List<string>() { "Dummy.Assembly" };
+            // TODO: wie return unabhängig vom aufrufwert???
+            _serviceMock.Setup(resolver => resolver.GetDependencyTree(It.IsAny<string>())).Returns (_dependencies);
+            _viewMock = new Mock<IMainFormView>();
+        }
+
 
         [TestMethod]
-        public void TestMainFormController_LoadDependencyTree_ShouldCallDependencyResolver()
+        public void TestMainFormController_LoadDependencyTree_ShouldAskViewForAssemblyName()
         {
             //Arrange
-            var serviceMock = new Mock<IDependencyResolver>();
-            var dependencies = new List<string>(){"Dummy.Assembly"};
-            serviceMock.Setup(resolver => resolver.GetDependencyTree("")).Returns(dependencies);
-            var viewMock = new Mock<IMainFormView>();
+            var sut = new MainFormController(_viewMock.Object, _serviceMock.Object);
 
-            var sut = new MainFormController(viewMock.Object, serviceMock.Object);
             //Act
+            sut.LoadDependencies();
 
-            sut.LoadDependencies("");
             //Assert
+            _viewMock.VerifyGet(view => view.RootAssemblyNameAndPath);
+        }
 
-            viewMock.Verify(view => view.SetDependencyTree(dependencies));
+        [TestMethod]
+        public void TestMainFormController_LoadDependencyTree_ShouldDelegateToDependencyResolver()
+        {
+            //Arrange
+            var sut = new MainFormController(_viewMock.Object, _serviceMock.Object);
+
+            //Act
+            sut.LoadDependencies();
+
+            //Assert
+            _serviceMock.Verify(service=>service.GetDependencyTree(It.IsAny<string>()));
+        }
+
+
+        [TestMethod]
+        public void TestMainFormController_LoadDependencyTree_ShouldSetDependencyTreeOnView()
+        {
+            //Arrange
+            var sut = new MainFormController(_viewMock.Object, _serviceMock.Object);
+
+            //Act
+            sut.LoadDependencies();
+
+            //Assert
+            _viewMock.Verify(view => view.SetDependencyTree(_dependencies));
         }
 
     }
