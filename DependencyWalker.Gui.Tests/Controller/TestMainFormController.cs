@@ -45,7 +45,7 @@ namespace DependencyWalker.Gui.Tests.Controller
             sut.LoadDependencies();
 
             //Assert
-            _viewMock.VerifyGet(view => view.RootAssemblyNameAndPath);
+            _viewMock.VerifyGet(view => view.RootAssemblyName);
         }
 
         [TestMethod]

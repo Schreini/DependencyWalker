@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using DependencyWalker.Gui.Services;
 using DependencyWalker.Gui.Views;
 
@@ -18,7 +19,8 @@ namespace DependencyWalker.Gui.Controller
 
         public void LoadDependencies()
         {
-            IList<string> dependencies = DependencyResolver.GetDependencyTree(View.RootAssemblyNameAndPath);
+            IList<string> dependencies =
+                DependencyResolver.GetDependencyTree(View.RootAssemblyPath, View.RootAssemblyName, 0);
             View.SetDependencyTree(dependencies);
         }
     }

@@ -14,10 +14,12 @@ namespace DependencyWalker.Gui
             InitializeComponent();
         }
 
-        public string RootAssemblyNameAndPath
+        public string RootAssemblyName
         {
             get { return TxtRootAssemblyName.Text; }
         }
+
+        public string RootAssemblyPath { get { return txtFolder.Text; }}
 
         public MainFormController Controller { get; set; }
 

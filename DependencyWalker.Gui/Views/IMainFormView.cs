@@ -6,7 +6,8 @@ namespace DependencyWalker.Gui.Views
     public interface IMainFormView
     {
         void SetDependencyTree(IList<string> dependencies);
-        string RootAssemblyNameAndPath { get; }
+        string RootAssemblyName { get; }
+        string RootAssemblyPath { get; }
         MainFormController Controller { get; set; }
     }
 }
