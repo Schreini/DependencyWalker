@@ -14,6 +14,14 @@ namespace DependencyWalker.Gui.Services
         public DependencyResolver()
         {
             _blackList.Add("mscorlib");
+            _blackList.Add("Castle");
+            _blackList.Add("NHibernate");
+            _blackList.Add("Elmah");
+            _blackList.Add("DevExpress");
+            _blackList.Add("Microsoft");
+            _blackList.Add("AjaxControlToolkit");
+            _blackList.Add("C1");
+            _blackList.Add("mscorlib");
             //_blackList.Add("System\\..*");
             _blackList.Add("System");
             //_blackList.Add("EnvDTE");
@@ -36,8 +44,6 @@ namespace DependencyWalker.Gui.Services
         public IList<string> GetDependencyTree(string path, string assemblyName, int indentNumber)
         {
             var dependencies = new List<string>();
-            if (IsOnBlacklist(assemblyName))
-                return dependencies;
 
             assemblyName = AppendDllExtensionIfNotPresent(assemblyName);
 
@@ -47,6 +53,9 @@ namespace DependencyWalker.Gui.Services
                 var assembly = Assembly.LoadFrom(Path.Combine(path, assemblyName));
                 foreach (AssemblyName referencedAssembly in assembly.GetReferencedAssemblies())
                 {
+                    if (IsOnBlacklist(referencedAssembly.Name))
+                        continue;
+
                     dependencies.Add(Indent(indentNumber, referencedAssembly.FullName));
                     dependencies.AddRange(GetDependencyTree(path, referencedAssembly.Name, indentNumber + 1));
                 }

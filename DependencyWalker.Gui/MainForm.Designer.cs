@@ -34,6 +34,8 @@
             this.BtnLoadDependencies = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.txtFolder = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.TxtFilter = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // TxtRootAssemblyName
@@ -61,11 +63,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtOutput.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtOutput.Location = new System.Drawing.Point(12, 65);
+            this.TxtOutput.Location = new System.Drawing.Point(12, 91);
             this.TxtOutput.Multiline = true;
             this.TxtOutput.Name = "TxtOutput";
             this.TxtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TxtOutput.Size = new System.Drawing.Size(938, 319);
+            this.TxtOutput.Size = new System.Drawing.Size(938, 293);
             this.TxtOutput.TabIndex = 2;
             // 
             // BtnLoadDependencies
@@ -98,11 +100,32 @@
             this.txtFolder.TabIndex = 4;
             this.txtFolder.Text = "F:\\svn\\Cluster_\\Qualifood.Jobs\\Qualifood.Qualiproof.Salmonellenbrief\\bin\\Debug";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 68);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(32, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Filter:";
+            // 
+            // TxtFilter
+            // 
+            this.TxtFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtFilter.Location = new System.Drawing.Point(98, 65);
+            this.TxtFilter.Name = "TxtFilter";
+            this.TxtFilter.Size = new System.Drawing.Size(704, 20);
+            this.TxtFilter.TabIndex = 6;
+            this.TxtFilter.Text = "^(mscorlib|System\\\\..*)$";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(962, 396);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.TxtFilter);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtFolder);
             this.Controls.Add(this.BtnLoadDependencies);
@@ -124,7 +147,8 @@
         private System.Windows.Forms.Button BtnLoadDependencies;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtFolder;
-
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox TxtFilter;
     }
 }
 
