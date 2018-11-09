@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DependencyWalker.Gui.Services
 {
     public interface IDependencyResolver
     {
         IList<string> GetDependencyTree(string assemblyName);
-        IList<string> GetDependencyTree(string path, string assemblyName, int indentNumber);
+        string GetDependencyTree2(string path, string assemblyName, IList<DependencyItem> dependencies);
     }
 }

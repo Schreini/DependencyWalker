@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DependencyWalker.Gui.Controller;
+using DependencyWalker.Gui.Services;
 using DependencyWalker.Gui.Views;
 
 namespace DependencyWalker.Gui
@@ -23,19 +25,35 @@ namespace DependencyWalker.Gui
 
         public MainFormController Controller { get; set; }
 
-        public void SetDependencyTree(IList<string> dependencies)
+        public void SetDependencyTree2(IList<DependencyItem> dependencies)
         {
-            var sb = new StringBuilder();
-            foreach (var dependency in dependencies)
+            TreeOutput.DataSource = dependencies;
+            var distinct = dependencies.Distinct().ToList();
+            List<DependencyItem> conflicts = new  List<DependencyItem>();
+            foreach (var di in distinct)
             {
-                sb.AppendLine(dependency);
+                if (distinct.Count(d => d.Name == di.Name) > 1)
+                    conflicts.Add(di);
             }
-            TxtOutput.Text = sb.ToString();
+
+            GrdConflicts.DataSource = conflicts;
+
+            TreeOutput.ExpandAll();
+        }
+
+        public void SetResult(string result)
+        {
+            TxtResult.Text = result;
         }
 
         private void BtnLoadDependencies_Click(object sender, EventArgs e)
         {
             Controller.LoadDependencies();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            //Controller.LoadDependencies();
         }
     }
 }

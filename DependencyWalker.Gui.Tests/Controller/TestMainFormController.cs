@@ -60,20 +60,5 @@ namespace DependencyWalker.Gui.Tests.Controller
             //Assert
             _serviceMock.Verify(service=>service.GetDependencyTree(It.IsAny<string>()));
         }
-
-
-        [TestMethod]
-        public void TestMainFormController_LoadDependencyTree_ShouldSetDependencyTreeOnView()
-        {
-            //Arrange
-            var sut = new MainFormController(_viewMock.Object, _serviceMock.Object);
-
-            //Act
-            sut.LoadDependencies();
-
-            //Assert
-            _viewMock.Verify(view => view.SetDependencyTree(_dependencies));
-        }
-
     }
 }
